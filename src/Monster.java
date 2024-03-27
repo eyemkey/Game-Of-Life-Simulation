@@ -1,8 +1,8 @@
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Monster extends Entity{
     public static final int ENTITY_ID = 4;
-    public static ArrayList<Monster> monsterList = new ArrayList<>();
+    public static LinkedList<Monster> monsterList = new LinkedList<>();
     private static final int MULTIPLY_CONST = 15;
 
     public Monster(int x, int y){

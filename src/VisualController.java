@@ -15,7 +15,7 @@ public class VisualController {
         return SCENE_SIDE;
     }
 
-    private static final javafx.scene.paint.Color[] COLOR_MAPPING = {
+    private static final Color[] COLOR_MAPPING = {
             Color.GRAY,    //0
             Color.GREEN,   //1
             Color.YELLOW,  //2
@@ -25,6 +25,7 @@ public class VisualController {
     };
 
     private final Rectangle[][] rectangleMatrix = getRectangleMatrix();
+
 
     public void rectangleMatrixSetFill(int x, int y, int cellID){
         rectangleMatrix[x][y].setFill(COLOR_MAPPING[cellID]);

@@ -9,6 +9,13 @@ public abstract class Entity {
     protected int energy;
     protected ArrayList<int[]> directions;
 
+    /**
+     * @param x coordinate of the entity
+     * @param y coordinate of the entity
+     * @param range The value of how far can move
+     * @param entityId The unique ID for each class
+     * @param energy The energy the object has
+     */
     public Entity(int x, int y, int range, int entityId, int energy){
         this.x = x;
         this.y = y;
@@ -20,9 +27,9 @@ public abstract class Entity {
         directions = getDirectionsList();
     }
 
-    protected int getMultiply(){
-        return multiply;
-    }
+    /**
+     * @return A list of change coordinates based on the range
+     */
     protected ArrayList<int[]> getDirectionsList(){
         ArrayList<int[]> list = new ArrayList<>();
         for(int i = -range; i <= range; i++){
@@ -38,6 +45,14 @@ public abstract class Entity {
         return random.nextInt(range);
     }
 
+    /**
+     * Finds the specified entities nearby
+     * @param x coordinate to look around
+     * @param y coordinate to look around
+     * @param directions to look at
+     * @param targetCellID ID of the entity to look for
+     * @return ArrayList of coordinates nearby with targetCellID
+     */
     protected static ArrayList<int[]> getCells(int x, int y, ArrayList<int[]> directions, int targetCellID){
         ArrayList<int[]> cellCoords = new ArrayList<>();
 
@@ -45,7 +60,8 @@ public abstract class Entity {
             int newX = x + direction[0];
             int newY = y + direction[1];
 
-            if (newX >= 0 && newX < EntityController.entityMatrix.length && newY >= 0 && newY < EntityController.entityMatrix[0].length && EntityController.entityMatrix[newX][newY] == targetCellID) {
+            int length = EntityController.entityMatrix.length;
+            if (newX >= 0 && newX < length && newY >= 0 && newY < length && EntityController.entityMatrix[newX][newY] == targetCellID) {
                 cellCoords.add(new int[]{newX, newY});
             }
         }
@@ -53,6 +69,10 @@ public abstract class Entity {
         return cellCoords;
     }
 
+    /**
+     * Multiplies the entity
+     * @param MULTIPLY_CONST the set value after which the entity multiplies
+     */
     protected void multiply(int MULTIPLY_CONST){
         multiply -= MULTIPLY_CONST;
         ArrayList<int[]> emptyCells = getCells(x, y, directions, Main.EMPTY_CELL_ID);
@@ -63,9 +83,11 @@ public abstract class Entity {
         }
     }
 
+    /**
+     * Randomly moves the entity
+     */
     protected void move(){
-        energy--;
-        if(energy <= 0){
+        if(energy-- <= 0){
             die();
             return;
         }
@@ -80,6 +102,11 @@ public abstract class Entity {
         }
     }
 
+    /**
+     * Makes the entity eat the food around
+     * @param preyID ID of what the entity tries to feed on
+     * @return true if fed false otherwise
+     */
     protected boolean eat(int preyID){
         ArrayList<int[]> preyCords = getCells(x, y, directions, preyID);
         if(!preyCords.isEmpty()){

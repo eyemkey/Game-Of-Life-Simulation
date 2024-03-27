@@ -1,8 +1,8 @@
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Herbivore extends Entity {
     public static final int ENTITY_ID = 2;
-    public static ArrayList<Herbivore> herbivoreList = new ArrayList<>();
+    public static LinkedList<Herbivore> herbivoreList = new LinkedList<>();
     private static final int MULTIPLY_CONST = 10;
 
     public Herbivore(int x, int y){

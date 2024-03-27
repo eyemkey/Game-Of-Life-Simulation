@@ -10,7 +10,7 @@ public class Main extends Application {
     public static int CELL_COUNT = VisualControllerInstance.getCellCount();
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage){
         //Initialize GridPane and Scene
         GridPane gridPane = new GridPane();
         Scene scene = new Scene(gridPane, VisualControllerInstance.getSceneSide(), VisualControllerInstance.getSceneSide());
@@ -22,7 +22,7 @@ public class Main extends Application {
 
         //Start the Stage
         stage.setScene(scene);
-        stage.setTitle("Rectangle");
+        stage.setTitle("Game of Life");
         stage.show();
 
         new AnimationTimer() {
@@ -33,7 +33,6 @@ public class Main extends Application {
 
                 if (++frameCounter % 20 != 0) return;
 
-                System.out.println("Handle");
                 frameCounter %= 20;
 
                 for (int i = 0; i < Grass.grassList.size(); i++) {

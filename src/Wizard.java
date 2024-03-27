@@ -1,7 +1,8 @@
+import java.util.LinkedList;
 import java.util.ArrayList;
 
 public class Wizard extends Entity{
-    public static ArrayList<Wizard> wizardList = new ArrayList<>();
+    public static LinkedList<Wizard> wizardList = new LinkedList<>();
     public static final int ENTITY_ID = 5;
     private static final int MAX_CAPACITY = 5;
     private static final int MAX_TIMER = 10;
@@ -19,17 +20,18 @@ public class Wizard extends Entity{
         timer = getRandomInt(MAX_TIMER) + 1;
     }
 
+    /**
+     * Creates a new Herbivore after the timer gets to 0
+     */
     public void create(){
-        timer--;
-        if(timer <= 0){
+        if(--timer <= 0){
             setTimer();
             ArrayList<int[]> emptyCells = getCells(x, y, directions, Main.EMPTY_CELL_ID);
             if(!emptyCells.isEmpty()){
                 int[] randomEmptyCell = emptyCells.get(getRandomInt(emptyCells.size()));
 
                 new Herbivore(randomEmptyCell[0], randomEmptyCell[1]);
-                capacity--;
-                if(capacity <= 0){
+                if(--capacity <= 0){
                     die();
                 }
             }

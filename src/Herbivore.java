@@ -18,7 +18,11 @@ public class Herbivore extends Entity {
                 multiply(MULTIPLY_CONST);
             }
         }else{
-            super.move();
+            if(energy-- <= 0){
+                die();
+                return;
+            }
+            super.move(new int[] {Main.EMPTY_CELL_ID}, false);
         }
     }
 
@@ -31,7 +35,18 @@ public class Herbivore extends Entity {
         }
     }
     protected void die() {
-        super.die();
+        EntityController.preyAnnulation(x, y);
+        super.die(false);
         herbivoreList.remove(this);
+    }
+
+    public static Herbivore getHerbivore(int x, int y){
+        for(int i = 0; i < herbivoreList.size(); i++){
+            if(herbivoreList.get(i).x == x && herbivoreList.get(i).y == y){
+                EntityController.preyAnnulation(x, y);
+                return herbivoreList.get(i);
+            }
+        }
+        return null;
     }
 }

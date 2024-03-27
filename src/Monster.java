@@ -20,12 +20,16 @@ public class Monster extends Entity{
         if(multiply >= MULTIPLY_CONST){
             super.multiply(MULTIPLY_CONST);
         }else{
-            move();
+            if(energy-- <= 0){
+                die();
+                return;
+            }
+            super.move(new int[] {Main.EMPTY_CELL_ID}, false);
         }
     }
 
     protected void die() {
-        super.die();
+        super.die(false);
         monsterList.remove(this);
     }
 }

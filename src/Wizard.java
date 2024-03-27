@@ -39,7 +39,7 @@ public class Wizard extends Entity{
     }
 
     protected void die() {
-        super.die();
+        super.die(false);
         wizardList.remove(this);
     }
 

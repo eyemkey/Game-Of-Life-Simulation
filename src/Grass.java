@@ -12,12 +12,12 @@ public class Grass extends Entity {
 
     /**
      * Removes the grass with specified coordinate
-     * @param x coordinate of the grass to be removed
-     * @param y coordinate of the grass to be removed
+     * @param remX coordinate of the grass to be removed
+     * @param remY coordinate of the grass to be removed
      */
-    public static void removeGrassIJ(int x, int y){
+    public static void removeGrassIJ(int remX, int remY){
         for (int i = 0; i < grassList.size(); i++) {
-            if(grassList.get(i).x == x && grassList.get(i).y == y){
+            if(grassList.get(i).x == remX && grassList.get(i).y == remY){
                 grassList.remove(i);
                 return;
             }

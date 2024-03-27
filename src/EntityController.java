@@ -1,13 +1,14 @@
+import java.sql.SQLOutput;
 import java.util.Random;
 
 public class EntityController {
     private static final int[] entityPopulationPercentage= {
-            27, //Empty Space
-            40, //Grass
-            18, //Herbivore
-            11, //Predator
-            2, //Monster
-            2 //Wizard
+            29, //Empty Space
+            45, //Grass
+            20, //Herbivore
+            4, //Predator
+            1, //Monster
+            1 //Wizard
     };
 
     public static final int[][] entityMatrix = new int[Main.CELL_COUNT][Main.CELL_COUNT];
@@ -21,7 +22,7 @@ public class EntityController {
      */
     public static void setEntityMatrixIJ(int x, int y, int value){
         entityMatrix[x][y] = value;
-        Main.VisualControllerInstance.rectangleMatrixSetFill(x, y, entityMatrix[x][y]);
+        Main.VisualControllerInstance.rectangleMatrixSetFill(x, y, value);
     }
     public static int getEntityMatrixIJ(int i, int j){
         return entityMatrix[i][j];
@@ -49,6 +50,7 @@ public class EntityController {
      * Initializes the Entity Matrix
      */
     public static void initializeEntityMatrix() {
+//        test();
         for (int i = 0; i < Main.CELL_COUNT; i++) {
             for (int j = 0; j < Main.CELL_COUNT; j++) {
                 int randomEntity = getRandomEntity();
@@ -82,6 +84,25 @@ public class EntityController {
             case Wizard.ENTITY_ID:
                 new Wizard(cords[0], cords[1]);
                 break;
+        }
+    }
+
+    public static void preyAnnulation(int x, int y){
+        for(Predator predator : Predator.predatorList){
+            if(predator.hasPrey() && predator.getPrey().getX() == x && predator.getPrey().getY() == y){
+                predator.clearPrey();
+            }
+        }
+    }
+
+    private static void test(){
+        for(int i = 0; i < 20; i++){
+            for(int j = 0; j < 20; j++){
+                if(i == 10 && j == 10){
+                    createNewEntity(new int[] {i, j}, 3);
+                }else if(i == 13 && j == 13) createNewEntity(new int[] {i, j}, 2);
+                else createNewEntity(new int[] {i, j}, 1);
+            }
         }
     }
 }

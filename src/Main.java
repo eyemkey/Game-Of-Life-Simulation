@@ -44,7 +44,7 @@ public class Main extends Application {
                 }
 
                 for (int i = 0; i < Predator.predatorList.size(); i++) {
-                    Predator.predatorList.get(i).eat();
+                    Predator.predatorList.get(i).eat(new int[] {Herbivore.ENTITY_ID});
                 }
 
                 for (int i = 0; i < Monster.monsterList.size(); i++) {
